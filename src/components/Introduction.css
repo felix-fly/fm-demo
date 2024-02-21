@@ -1,0 +1,160 @@
+.intro {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.intro-video {
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.intro-image {
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(../assets/intro-background.jpg);
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  &:after {
+    display: block;
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+}
+
+.intro-desc {
+  position: absolute;
+  font-size: 12px;
+  bottom: 0;
+  left: 0;
+  padding: 25px;
+  color: #fff;
+  width: 420px;
+}
+
+.intro-down {
+  position: absolute;
+  width: 150px;
+  bottom: 20px;
+  left: 50%;
+  margin-left: -75px;
+  z-index: 50;
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  -webkit-font-smoothing: antialiased;
+
+  & .icon {
+    transition: all .3s ease;
+    width: 26px;
+    height: 44px;
+    display: block;
+    border-radius: 13px;
+    border: 2px solid #b3b3b3;
+    margin: 0 auto;
+
+    &:before {
+      transition: all .3s ease;
+      width: 6px;
+      height: 6px;
+      animation: scrollDownKnobAnimation 2s ease infinite;
+      position: absolute;
+      top: 6px;
+      border-radius: 50%;
+      background-color: #b3b3b3;
+      content: '';
+      left: 50%;
+      margin-left: -3px;
+    }
+  }
+
+  & span {
+    transition: all .3s ease;
+    position: relative;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    top: -24px;
+  }
+}
+
+.intro-scroll-wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  scroll-behavior: smooth;
+  border: 12px solid #e6e6e6;
+  box-sizing: border-box;
+}
+
+.intro-scroll-inner {
+  padding: calc(50vh - 34px) 0;
+  color: #fff;
+  font-size: 48px;
+  text-align: center;
+  box-sizing: border-box;
+
+  & p {
+    width: 100%;
+    white-space: nowrap;
+    margin: 0 0 10px;
+
+    &.empty {
+      height: 15rem;
+    }
+  }
+
+  & a {
+    text-decoration: underline;
+    color: #fff;
+    position: relative;
+  }
+
+  & a::before {
+    position: absolute;
+    top: 6px;
+    right: -16px;
+    font-size: 50%;
+    display: block;
+    content: '1';
+    color: #fff;
+  }
+}
+
+@media (max-width: 767px) {
+  .intro-scroll-inner {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 991px) {
+  .intro-desc {
+    display: none !important;
+  }
+}
+
+@keyframes scrollDownKnobAnimation {
+  0% {
+    transform: translate3d(0, 0, 0)
+  }
+
+  100% {
+    transform: translate3d(0, 150%, 0)
+  }
+}

@@ -1,0 +1,59 @@
+.slide-cover {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: blue;
+
+  & .top {
+    height: 50%;
+    background-color: gray;
+  }
+
+  &.down,
+  &.up {
+    display: block;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in;
+  }
+
+  &.down {
+    animation-name: slideCoverDown;
+  }
+
+  &.up {
+    animation-name: slideCoverUp;
+  }
+}
+
+@keyframes slideCoverUp {
+  0% {
+    top: 100%;
+  }
+
+  50% {
+    top: 0;
+    transform: scaleY(1.8);
+  }
+
+  100% {
+    top: -100%;
+  }
+}
+
+@keyframes slideCoverDown {
+  0% {
+    top: -100%;
+  }
+
+  50% {
+    top: 0;
+    transform: scaleY(1.8);
+  }
+
+  100% {
+    top: 100%;
+  }
+}
