@@ -11,26 +11,21 @@ function Introduction({ onNav, scene }) {
   const wrapRef = useRef();
   const innerRef = useRef();
   const descRef = useRef();
-  const duration = 200;
   const cls = getSceneStatus(scene - NAV_TYPE.INTRO);
   let pos = 0;
   let cur = 0;
   let touchStart = 0;
-  let start = null;
 
   if (wrapRef.current) {
     pos = wrapRef.current.scrollTop;
     cur = pos;
   }
 
-  function doScroll(timestamp) {
-    if (!start) start = timestamp;
+  function doScroll() {
     const viewHeight = wrapRef.current.clientHeight;
-    const past = timestamp - start;
-    const rate = past / duration;
     const progress = cur / (innerRef.current.clientHeight - viewHeight);
     document.querySelector('.nav-progress').style.width = `${progress * 100}%`;
-    cur += rate * (pos - cur);
+    cur += 0.5 * (pos - cur);
     wrapRef.current.scrollTop = cur;
     innerRef.current.childNodes.forEach(it => {
       const { y } = it.getBoundingClientRect();
@@ -42,10 +37,8 @@ function Introduction({ onNav, scene }) {
       it.style.opacity = opacity > 0 ? opacity : 0;
       it.style.transform = transform;
     });
-    if (past < duration) {
-      window.requestAnimationFrame(doScroll);
-    } else {
-      start = null;
+    if (Math.abs(pos - cur) > 0.1) {
+      doScroll();
     }
   }
 
@@ -61,9 +54,10 @@ function Introduction({ onNav, scene }) {
     descRef.current.style.display = display;
     if (pos < 0) {
       pos = 0;
+      if (cur > 0) doScroll();
       return;
     }
-    window.requestAnimationFrame(doScroll);
+    doScroll();
   };
 
   const onTouchStart = e => {
